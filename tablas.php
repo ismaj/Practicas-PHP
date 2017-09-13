@@ -7,6 +7,8 @@
 <body>
 	<h1>Tablas usando PHP</h1>
 	<?php
+		
+
 		function mostrar($valor){
 			if($valor % 2){
 				$fondo="black";	
@@ -17,6 +19,9 @@
 			}else
 				$color=" green";
 				echo"<td bgcolor='$fondo'><font color='$color'>$valor$color</font></td>\n";
+			    #este es un comentario
+			    //este es otro comentario
+			    /*Aqui hay otro comentario*/
 		}
 	?>
 <table border="1">
