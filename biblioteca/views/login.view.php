@@ -22,6 +22,7 @@
 	
 </header>
 	<div class="container">
+  <!-- Panel panel primary is the blue frame-->
     <div class="panel panel-primary">
     <div class="panel-heading"><h1 style="text-align: center;" >Login</h1></div>
     <div class="panel-body">

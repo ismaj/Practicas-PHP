@@ -11,6 +11,11 @@
     padding: 0px !important;
   }
 
+    .error {font-weight: bold; color:red;}
+    .mensaje {color:#030;}
+    .listadoImagenes img {float:left;border:1px solid #ccc; padding:2px;margin:2px;}
+  
+
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -18,23 +23,25 @@
 </head>
 <body>
 
-<header>
-	
-</header>
 	<div class="container">
     <div class="panel panel-primary">
     <div class="panel-heading"><h1 style="text-align: center;" >Registro de usuarios</h1></div>
     <div class="panel-body">
     <!--  Start the form register-->
-		<form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="on">
+		<form enctype="multipart/form-data" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="on">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Nombres</label>
       <div class="col-sm-6">
         <div class="input-group">
         <div class="input-group-addon"><span class="icon-user-tie"></span></div>
-          <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese 2 nombres">
+          <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese 2 nombres" required autofocus>
         </div>
-      </div>
+        <div class="col-sm-4">
+          <input type="file" name="userfile">
+        </div>
+
+     </div>
+
     </div>
       <div class="form-group">
         <label class=" control-label col-sm-2">Apellidos</label>
@@ -51,7 +58,7 @@
     <div class="col-sm-6">
       <div class="input-group">
         <div class="input-group-addon"><span class="icon-envelop"></span></div>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
       </div>
     </div>
   </div>
@@ -72,6 +79,12 @@
       <div class="input-group-addon"><span class="icon-key"></span></div>
         <input class="form-control" type="password" name="repeatpassword" id="repeatpassword" placeholder="Repeat Password">
     </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Fecha Nacimiento</label>
+    <div class="col-sm-6">
+      <input type="date" name="date" id="fecha">
     </div>
   </div>
   <div class="form-group"> 
