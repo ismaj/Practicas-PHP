@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 	$errores='';
 
@@ -52,9 +53,9 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"]))
        // $id=$mysqli->insert_id;
  
         # Mostramos la imagen agregada
-        echo "<div><span  class='mensaje'>Imagen agregada con el id </span></div>";
+        //echo "<div><span  class='mensaje'>Imagen agregada con el id </span></div>";
     }else{
-        echo "<div><span  class='error'>Error: El formato de archivo tiene que ser JPG, GIF, BMP o PNG.</span></div>";
+        //echo "<div><span  class='error'>Error: El formato de archivo tiene que ser JPG, GIF, BMP o PNG.</span></div>";
     }
 }
 

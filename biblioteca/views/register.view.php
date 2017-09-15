@@ -14,12 +14,14 @@
     .error {font-weight: bold; color:red;}
     .mensaje {color:#030;}
     .listadoImagenes img {float:left;border:1px solid #ccc; padding:2px;margin:2px;}
-  
+  #preViewImg{
+    position: absolute;
+  }
 
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+ 
 </head>
 <body>
 
@@ -36,12 +38,16 @@
         <div class="input-group-addon"><span class="icon-user-tie"></span></div>
           <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese 2 nombres" required autofocus>
         </div>
-        <div class="col-sm-4">
-          <input type="file" name="userfile">
-        </div>
+      
 
      </div>
-
+           <div class="col-sm-4">
+              <input type="file" name="userfile" id="imgfile" />
+             <figure>
+                  <img id="preViewImg"  alt="Something" width="180" height="180" />
+             </figure>
+            </div>
+            
     </div>
       <div class="form-group">
         <label class=" control-label col-sm-2">Apellidos</label>
@@ -114,4 +120,17 @@
     </blockquote>
   </div>
 </body>
+ <script type="text/javascript">
+ $('#imgfile').on('change', function(ev) {
+    var f = ev.target.files[0];
+    var fr = new FileReader();
+    
+    fr.onload = function(ev2) {
+        console.dir(ev2);
+        $('#preViewImg').attr('src', ev2.target.result);
+    };
+    
+    fr.readAsDataURL(f);
+});
+  </script>
 </html>
