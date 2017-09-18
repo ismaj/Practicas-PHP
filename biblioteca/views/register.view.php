@@ -17,11 +17,9 @@
   #preViewImg{
     position: absolute;
   }
-
+  
   </style>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+  
 </head>
 <body>
 
@@ -30,7 +28,7 @@
     <div class="panel-heading"><h1 style="text-align: center;" >Registro de usuarios</h1></div>
     <div class="panel-body">
     <!--  Start the form register-->
-		<form enctype="multipart/form-data" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="on">
+		<form onsubmit="return checkForm(this);" enctype="multipart/form-data" name="form" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" >
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Nombres</label>
       <div class="col-sm-6">
@@ -42,7 +40,7 @@
 
      </div>
            <div class="col-sm-4">
-              <input type="file" name="userfile" id="imgfile" />
+              <input type="file" name="userfile" id="imgfile">
              <figure>
                   <img id="preViewImg"  alt="Something" width="180" height="180" />
              </figure>
@@ -74,23 +72,25 @@
     <div class="col-sm-6"> 
     <div class="input-group">
       <div class="input-group-addon"><span class="icon-key"></span></div>
-      <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
+      <input class="form-control" id="pwd" placeholder="Enter password" title="Password must contain at least 6 characters, including UPPER/lowercase and numbers" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password" onchange=" this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.repeatpassword.pattern = RegExp.escape(this.value);">
+      
       </div>
     </div>
   </div>
   <div class="form-group"> 
-    <label class="control-label col-sm-2">Repeat Password</label>
+    <label class="control-label col-sm-2">Confirm Password</label>
     <div class="col-sm-6">
     <div class="input-group">
       <div class="input-group-addon"><span class="icon-key"></span></div>
-        <input class="form-control" type="password" name="repeatpassword" id="repeatpassword" placeholder="Repeat Password">
+      <input class="form-control" type="password" name="repeatpassword" id="repeatpassword" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"  onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
+        
     </div>
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2">Fecha Nacimiento</label>
     <div class="col-sm-6">
-      <input type="date" name="date" id="fecha">
+      <input type="date" name="fecha_nacimiento" id="fecha">
     </div>
   </div>
   <div class="form-group"> 
@@ -119,8 +119,11 @@
       <footer>Lee Brown</footer>
     </blockquote>
   </div>
-</body>
- <script type="text/javascript">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--  <script type="text/javascript" src="views/js/valida.js"></script>-->
+<script type="text/javascript">
+
  $('#imgfile').on('change', function(ev) {
     var f = ev.target.files[0];
     var fr = new FileReader();
@@ -133,4 +136,8 @@
     fr.readAsDataURL(f);
 });
   </script>
+ 
+</body>
+
+ 
 </html>

@@ -12,6 +12,8 @@
 		$lastname=$_POST['lastname'];
 		$mail=$_POST['email'];
 		$password=$_POST['password'];
+		$fecha_nacimiento=$_POST['fecha_nacimiento'];
+		
 	
 	//echo " $name . $lastname . $mail . $password ";
 	if(empty($name) or empty($lastname) or empty($password) or empty($mail)){
@@ -23,7 +25,7 @@
 			echo 'Error'.$ex->getMessage();	
 		}
 
-		$statement=$conexion->prepare('SELECT * from user_accounts where email_user= :email LIMIT 1');
+		$statement=$conexion->prepare('SELECT * from users_accounts where email_user= :email LIMIT 1');
 		$statement->execute(array(':email'=>$mail));
 		$result=$statement->fetch();
 
@@ -46,23 +48,27 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"]))
         //echo "<BR>".$info[3]; //cadena de texto para el tag <img
  
         # Escapa caracteres especiales
-        $imagenEscapes=mysql_escape_string(file_get_contents($_FILES["userfile"]["tmp_name"]));
+        $imagenEscapes=(file_get_contents($_FILES["userfile"]["tmp_name"]));
  
       
         # Cogemos el identificador con que se ha guardado
        // $id=$mysqli->insert_id;
  
         # Mostramos la imagen agregada
-        //echo "<div><span  class='mensaje'>Imagen agregada con el id </span></div>";
+        echo "<div><span  class='mensaje'>Imagen agregada con el id </span></div>";
     }else{
-        //echo "<div><span  class='error'>Error: El formato de archivo tiene que ser JPG, GIF, BMP o PNG.</span></div>";
+        echo "<div><span class='error'>Error: El formato de archivo tiene que ser JPG, GIF, BMP o PNG.</span></div>";
     }
+}
+else{
+	echo "No se pudo cargar la foto";
 }
 
 
 			$password=hash('sha512', $password);
-			$statement=$conexion->prepare('INSERT into user_accounts (id_user,nombre_user,apellido_user,password_user,email_user,picture_profile_user) VALUES (null,:name_user,:lastname_user,:password,:email,:imagen)');
-			$statement->execute(array(':name_user'=>$name,':lastname_user'=>$lastname,':password'=>$password,':email'=>$mail,':imagen'=>$imagenEscapes));
+			$statement=$conexion->prepare('INSERT into users_accounts (id_user,nombre_user,apellido_user,password_user,email_user,picture_profile_user,fecha_nacimiento) VALUES (null,:name_user,:lastname_user,:password,:email,:imagen,:fecha_nacimiento)');
+			$statement->execute(array(':name_user'=>$name,':lastname_user'=>$lastname,':password'=>$password,':email'=>$mail,':imagen'=>$imagenEscapes,':fecha_nacimiento'=>$fecha_nacimiento));
+
 
 			header('Location:login.php');
 		
